@@ -21,6 +21,10 @@ while True:
         print('A razão é crescente')
     elif (razao < 0):
       print('A razão é decrescente')
+
+    user = int(input('Digite o valor da posição que deseja na P.A: '))
+    totalUser = inicial + razao * (user - 1)
+    print(f'O {user}º termo é o número {totalUser}')
   else:
     print('Digite um valor positivo')
     break
