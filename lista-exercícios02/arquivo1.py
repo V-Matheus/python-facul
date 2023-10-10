@@ -28,6 +28,3 @@ while True:
   else:
     print('Digite um valor positivo')
     break
- 
-
- # (inicial  inicial *2  inicial*3)  == qElementos
