@@ -5,13 +5,13 @@ while True:
   x = (inicial+razao)*qElementos
 
   if inicial >= 1 and qElementos > 0:
+    soma = (qElementos * (inicial + x)) /2
     while x > 0:
       x = x - razao
       if razao > x:
         break
       print(f'Os valores da P.A é, {x}')
     
-    soma = (qElementos * (inicial + x)) /2
     print(f'A soma dessa P.A é {soma}')
 
     if(razao == 0):
