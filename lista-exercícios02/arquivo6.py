@@ -8,7 +8,7 @@ else:
   btemp = b
   mcd = 0
   divisor  = 2
-  while divisor <= atemp:
+  while atemp >= divisor:
       if atemp % divisor == 0 and btemp % divisor == 0:
           mdc = divisor
       divisor += 1 

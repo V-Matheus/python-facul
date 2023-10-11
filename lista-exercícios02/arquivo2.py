@@ -1,14 +1,14 @@
-a = int(input("Digite o primeiro número inteiro positivo: "))
-b = int(input("Digite o segundo número inteiro positivo: "))
+num1 = int(input("Digite o primeiro número inteiro positivo: "))
+num2 = int(input("Digite o segundo número inteiro positivo: "))
+temp1 = num1
+temp2 = num2
 
-if a <= 0 or b <= 0:
+if temp1 <= 0 or temp2 <= 0:
     print("Por favor, digite números inteiros positivos.")
 else:
-  atemp = a
-  btemp = b
-  while btemp != 0:
-        temp = btemp
-        btemp = atemp % b
-        atemp = temp
-        mdc = atemp
-  print(f"O MDC de {a} e {b} é {mdc}")
+    while temp2:
+        temp = temp2
+        temp2 = temp1 % temp2
+        temp1 = temp
+    mdc = temp1
+    print(f"O MDC de {num1} e {num2} é {mdc}")
