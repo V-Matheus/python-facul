@@ -10,4 +10,3 @@ if n != 0 or i != 0 or j != 0:
     
 else: 
     print('digite um valor positivo')
-
