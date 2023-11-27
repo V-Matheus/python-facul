@@ -1,16 +1,14 @@
-import enum
 import random
-# n = int(input('Digite o tamanho da lista: '))
 
-# lista = [random.randint(0,999) for _ in range(n)]
-lista = [1,2,3,4,5,6,7,8,9,9,9]
+n = int(input('Digite o tamanho da lista: '))
+lista = [random.randint(0,999) for _ in range(n)]
 
-v = int(input('Digite um valor: '))
-print()
+numero = int(input('Digite um valor: '))
 
-if v in lista:
-  print('O valor conta na lista')
-  indexs = [index for index, elemento in enumerate(lista) if elemento == v]
-  print(f'O valor aparece {lista.count(v)} vezes e nas posições {indexs}')
+if numero in lista:
+  print('O valor consta na lista')
+# Verifica em cada item da lista se o número está presente e se estiver entrega o valor e o seu index
+  indexs = [index for index, elemento in enumerate(lista) if elemento == numero]
+  print(f'O valor aparece {lista.count(numero)} vezes e nas posições {indexs}')
 else:
   print('O valor não consta na lista')
