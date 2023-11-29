@@ -23,3 +23,4 @@ for aluno in lista_alunos:
     acertos = sum(resposta_gabarito == resposta_aluno for resposta_gabarito, resposta_aluno in zip(gabarito, respostas_aluno))
     print(f'{aluno} - acertos: {acertos}')
 
+
