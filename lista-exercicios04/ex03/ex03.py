@@ -1,6 +1,3 @@
-from ast import Num
-from distutils.command.clean import clean
-from msilib import type_key
 from dolar import cotacoes_dolar
 
 # Percorre toda a lista de dolar e recolhe os dados
@@ -9,20 +6,20 @@ for dado in cotacoes_dolar:
 
   # Separa o mes
   data = dado[0]
-  partes = data.split('-')
-  mes = partes[1]
+  mes = data.split('-')[1]
   
 
   if mes == '01':
     valores.append(dado[1])
     janeiroList = sum(valores)
     janeiro = f'Janeiro: {janeiroList}'
-    print(janeiro)
+    # print(janeiro)
+    valores.clear()
 
   if mes == '02':
     valores.append(dado[1])
     FevereiroList = sum(valores)
-    fevereiro = f'Fevereiro: {FevereiroList}'
+    fevereiro = f'Fevereiro: {valores}'
 
   if mes == '03':
     valores.append(dado[1])
@@ -53,3 +50,5 @@ for dado in cotacoes_dolar:
 
   if mes == '12':
     valores.append(dado[1])
+print(janeiro)
+print(fevereiro)
