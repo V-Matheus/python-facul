@@ -18,20 +18,15 @@ lista_gabarito = gabarito.copy()
 acertos = 0
 
 # Calcula a quantidade de acertos
-for aluno in lista_alunos:
-    nome_aluno = aluno[0]
-    respostas_aluno = aluno[1:]
-    acertos = sum(resposta_gabarito == resposta_aluno for resposta_gabarito, resposta_aluno in zip(gabarito, respostas_aluno))
-    print(f'{aluno} - acertos: {acertos}')
+    # Criei uma biblioteca com as chaves 'aluno', na qual recebe o primeiro item de cada lista,
+    # e 'acertos', primeiro compara a resposta do gabarito com a resposta do aluno e soma sempre que isso acontecer
+    # e irá fazer isso para todos os alunos
+lista_alunos_acertos = [{'aluno': aluno[0], 'acertos': sum(resposta_gabarito == resposta_aluno for resposta_gabarito, resposta_aluno in zip(gabarito, aluno[1:]))} for aluno in lista_alunos]
 
-# # Ordenando a lista de alunos pela quantidade de acertos (decrescente)
-# lista_alunos.sort(key=lambda x: x[-1], reverse=True)
+# Ordena a lista de alunos
+    # Ordenei usando lambda, na qual ordena de acordo com a quaantidade de acertos e coloca de forma decrescente com o reverse
+lista_alunos_ordenada = sorted(lista_alunos_acertos, key=lambda x: x['acertos'], reverse=True)
 
-# # Exibindo os resultados
-# # print("Gabarito da prova:", lista_gabarito)
-# # print("\nResultados dos Alunos:")
-# for aluno in lista_alunos:
-#     nome_aluno = aluno[0]
-#     respostas_aluno = aluno[1:-1]
-#     acertos = aluno[-1]
-#     # print(f"{nome_aluno}: {respostas_aluno} - Acertos: {acertos}")
+# Imprime a lista ordenada
+for aluno in lista_alunos_ordenada:
+    print(f"{aluno['aluno']} - acertos: {aluno['acertos']}")
