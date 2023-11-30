@@ -13,7 +13,8 @@ for linha in matriz_original:
     print(linha)
 
 # Calcular e exibir matriz transposta
-matriz_transposta = [[matriz_original[j][i] for j in range(len(matriz_original))] for i in range(len(matriz_original[0]))]
+ # Ele seleciona as linhas 'l' e colunas 'c' e substitui esses valores
+matriz_transposta = [[matriz_original[l][c] for l in range(len(matriz_original))] for c in range(len(matriz_original[0]))]
 
 print("Matriz Transposta:")
 for linha in matriz_transposta:
