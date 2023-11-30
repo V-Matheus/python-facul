@@ -11,6 +11,13 @@ for dado in cotacoes_dolar:
   valores_por_mes[mes].append(dado[1])
 
 for mes, valores in valores_por_mes.items():
+  maximo = max(valores)
+  # Procurar o valor máximo e sua data
+  for index, dado in enumerate(cotacoes_dolar):
+    if dado[1] == maximo:
+        data = dado[0]
+        break
   media = round(sum(valores) / len(valores_por_mes[mes]), 4)
-  print(f'No {mes}º mês: Média: {media}')
+  print(f'No {mes}º mês: A maior cotação: {maximo} - Data: {data} Média: - {media} \n')
+  
   
