@@ -9,3 +9,4 @@ for cidade in lstCapitais:
 
 arqSaida.write(f'\nPopulação total:{popTotal}')
 arqSaida.close()
+
