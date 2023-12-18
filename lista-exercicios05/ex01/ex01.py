@@ -2,13 +2,16 @@ from turtle import pos
 import requests, os
 from datetime import date
 
+
+# Criando o Json
 strURL = 'https://api.cartolafc.globo.com/atletas/mercado'
 dictCartola = requests.get(strURL, verify=False).json()
-
 atletas = dictCartola.get('atletas')
+
 maiores_pontuacoes = {}
 posicoes = {1: 'goleiro', 2: 'lateral', 3: 'zagueiro', 4: 'meia', 5: 'atacante', 6: 'tecnico'}
 
+# Puxando informações do Json
 for atleta in atletas:
     nome = atleta['nome']
     posicao_id = atleta['posicao_id']
@@ -49,6 +52,9 @@ for jogador, info in melhores_atletas:
         melhores_tecnicos[jogador] = info['pontuacao']
 
 esquema_possiveis = [343, 352, 433, 442, 451, 532, 541]
+
+
+# Exibir Resultados
 
 while  True:
     esquema = int(input(f'Escolha um esquema tático: \n {esquema_possiveis}\n'))
