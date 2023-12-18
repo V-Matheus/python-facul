@@ -30,20 +30,31 @@ while True:
     except:
         print(f"\nERROR: {sys.exc_info()[0]}")
 
-atletas = dictCartola.get('atletas')
+# Puxando informações dos clubes
+
+clubes = dictCartola.get('clubes')
+clubes_dic = {}
+for id_clube, info_clube in clubes.items():
+    nome_clube = info_clube['nome']
+    clubes_dic[id_clube] = nome_clube
+
 maiores_pontuacoes = {}
 posicoes = {1: 'goleiro', 2: 'lateral', 3: 'zagueiro', 4: 'meia', 5: 'atacante', 6: 'tecnico'}
 
-# Puxando informações do Json
+atletas = dictCartola.get('atletas')
+# Puxando informações dos atletas
 for atleta in atletas:
     nome = atleta['nome']
+    apelido = atleta['apelido']
+    clube_id = atleta['clube_id']
+    clube = clubes_dic[str(clube_id)]
     posicao_id = atleta['posicao_id']
     jogos_num = atleta['jogos_num']
     media_num = atleta['media_num']
     maior_pontuacao = round(jogos_num * media_num, 2)
 
     # Armazena a maior pontuação para cada jogador no dicionário maiores_pontuacoes
-    maiores_pontuacoes[nome] = {'pontuacao': maior_pontuacao, 'posicao': posicoes[posicao_id]}
+    maiores_pontuacoes[nome] = {'pontuacao': maior_pontuacao, 'posicao': posicoes[posicao_id], 'apelido' : apelido, 'clube': clube}
 
 # Ordena os jogadores por maior pontuação
 melhores_atletas = sorted(maiores_pontuacoes.items(), key=lambda x: x[1]['pontuacao'], reverse=True)
@@ -62,27 +73,26 @@ for jogador, info in melhores_atletas:
 
     # Adicionar o jogador ao dicionário da posição correspondente
     if posicao == 'goleiro':
-        melhores_goleiros[jogador] = info['pontuacao']
+        melhores_goleiros[jogador] = info
     elif posicao == 'lateral':
-        melhores_laterais[jogador] = info['pontuacao']
+        melhores_laterais[jogador] = info
     elif posicao == 'zagueiro':
-        melhores_zagueiros[jogador] = info['pontuacao']
+        melhores_zagueiros[jogador] = info
     elif posicao == 'meia':
-        melhores_meias[jogador] = info['pontuacao']
+        melhores_meias[jogador] = info
     elif posicao == 'atacante':
-        melhores_atacantes[jogador] = info['pontuacao']
+        melhores_atacantes[jogador] = info
     elif posicao == 'tecnico':
-        melhores_tecnicos[jogador] = info['pontuacao']
+        melhores_tecnicos[jogador] = info
 
 esquema_possiveis = [343, 352, 433, 442, 451, 532, 541]
-
 
 # Exibir Resultados
 
 while  True:
     esquema = int(input(f'Escolha um esquema tático: \n {esquema_possiveis}\n'))
-    melhor_goleiro = list(melhores_goleiros.keys())[:1]
-    melhor_tecnico = list(melhores_tecnicos.keys())[:1]
+    melhor_goleiro = {'nome': list(melhores_goleiros.keys())[1], 'info': list(melhores_goleiros.values())[1]}
+    melhor_tecnico = {'nome': list(melhores_tecnicos.keys())[1], 'info': list(melhores_tecnicos.values())[1]}
 
     if esquema not in esquema_possiveis: 
         print('Digite um esquema válido')
@@ -90,18 +100,29 @@ while  True:
     else:
             print(f'Os melhores jogadores para esse esquema tático são:\n')
             if esquema == 343:
-                print(f'goleiro: {melhor_goleiro}\n')
+                # x= 3
+                print(f'goleiro: {melhor_goleiro["nome"]} - apelido: {melhor_goleiro["info"]["apelido"]} - pontuação: {melhor_goleiro["info"]["pontuacao"]} - clube: {melhor_goleiro["info"]["clube"]}\n')
 
-                melhores_zagueiros_343 = list(melhores_zagueiros.keys())[:3]
-                print(f'zagueiros: {melhores_zagueiros_343}\n')
+                # Pega as informações + nome dos jogadores a partir de uma lista de valores e chaves dentro do dicionário
+                for info_zagueiros, name_zagueiros in zip(list(melhores_zagueiros.values())[:3], list(melhores_zagueiros.keys())[:3]):
+                    zagueiros_pontuacao = info_zagueiros['pontuacao']
+                    zagueiros_apelido = info_zagueiros['apelido']
+                    zagueiros_clube = info_zagueiros['clube']
+                    print(f'zagueiro: {name_zagueiros} - apelido: {zagueiros_apelido} - pontuacao: {zagueiros_pontuacao}  - clube: {zagueiros_clube}\n')
 
-                melhores_meias_343 = list(melhores_meias.keys())[:3]
-                print(f'meias: {melhores_meias_343}\n')
+                for info_meias, name_meias in zip(list(melhores_meias.values())[:4], list(melhores_meias.keys())[:4]):
+                    meias_pontuacao = info_meias['pontuacao']
+                    meias_apelido = info_meias['apelido']
+                    meias_clube = info_meias['clube']
+                    print(f'meias: {name_meias} - apelido: {meias_apelido} - pontuacao: {meias_pontuacao}  - clube: {meias_clube}\n')
 
-                melhores_atacantes_343 = list(melhores_atacantes.keys())[:3]
-                print(f'atacantes: {melhores_atacantes_343}\n')
+                for info_atacantes, name_atacantes in zip(list(melhores_atacantes.values())[:3], list(melhores_atacantes.keys())[:3]):
+                    atacantes_pontuacao = info_atacantes['pontuacao']
+                    atacantes_apelido = info_atacantes['apelido']
+                    atacantes_clube = info_atacantes['clube']
+                    print(f'atacantes: {name_atacantes} - apelido: {atacantes_apelido} - pontuacao: {atacantes_pontuacao}  - clube: {atacantes_clube}\n')
 
-                print(f'tecnico: {melhor_tecnico}\n')
+                print(f'tecnico: {melhor_tecnico["nome"]} - apelido: {melhor_tecnico["info"]["apelido"]} - pontuação: {melhor_tecnico["info"]["pontuacao"]} - clube: {melhor_tecnico["info"]["clube"]}\n')
                 break
 
             if esquema == 352:
