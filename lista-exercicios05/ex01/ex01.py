@@ -1,13 +1,36 @@
-from turtle import pos
-import requests, os
-from datetime import date
+import requests, datetime, os, sys, json
 
 
-# Criando o Json
 strURL = 'https://api.cartolafc.globo.com/atletas/mercado'
-dictCartola = requests.get(strURL, verify=False).json()
-atletas = dictCartola.get('atletas')
+strDiretorio = os.path.abspath(__file__)
+strDiretorio = os.path.dirname(strDiretorio)
 
+# Obter o ano atual
+while True:
+    try:
+        ano = int(input(f"Escolha um ano (0 para sair): "))
+        if ano == 0:
+            print("Saindo do programa!")
+            sys.exit()
+        elif ano == datetime.datetime.now().year:
+            dictCartola = requests.get(strURL, verify=True).json()
+            break
+        else:
+            strNomeArq = strDiretorio + f'\\cartola_fc_{ano}.json'
+            dictOpen = open(strNomeArq,'r',encoding='UTF-8')
+            dictCartola = dictOpen.read()
+            dictCartola = json.loads(dictCartola)
+            dictOpen.close()
+            break
+    except ValueError:
+        print("\nERROR: O valor informado precisa ser inteiro de base10!")
+        continue
+    except FileNotFoundError:
+        print("\nERROR: O ano desejado não possui arquivo!")
+    except:
+        print(f"\nERROR: {sys.exc_info()[0]}")
+
+atletas = dictCartola.get('atletas')
 maiores_pontuacoes = {}
 posicoes = {1: 'goleiro', 2: 'lateral', 3: 'zagueiro', 4: 'meia', 5: 'atacante', 6: 'tecnico'}
 
@@ -67,6 +90,8 @@ while  True:
     else:
             print(f'Os melhores jogadores para esse esquema tático são:\n')
             if esquema == 343:
+                print(f'goleiro: {melhor_goleiro}\n')
+
                 melhores_zagueiros_343 = list(melhores_zagueiros.keys())[:3]
                 print(f'zagueiros: {melhores_zagueiros_343}\n')
 
@@ -76,12 +101,12 @@ while  True:
                 melhores_atacantes_343 = list(melhores_atacantes.keys())[:3]
                 print(f'atacantes: {melhores_atacantes_343}\n')
 
-                print(f'goleiro: {melhor_goleiro}\n')
-
                 print(f'tecnico: {melhor_tecnico}\n')
                 break
 
             if esquema == 352:
+                print(f'goleiro: {melhor_goleiro}\n')
+
                 melhores_zagueiros_352 = list(melhores_zagueiros.keys())[:3]
                 print(f'zagueiros: {melhores_zagueiros_352}\n')
 
@@ -91,12 +116,12 @@ while  True:
                 melhores_atacantes_352 = list(melhores_atacantes.keys())[:2]
                 print(f'atacantes: {melhores_atacantes_352}\n')
 
-                print(f'goleiro: {melhor_goleiro}\n')
-
                 print(f'tecnico: {melhor_tecnico}\n')
                 break
 
             if esquema == 433:
+                print(f'goleiro: {melhor_goleiro}\n')
+
                 melhores_zagueiros_433 = list(melhores_zagueiros.keys())[:2]
                 print(f'zagueiros: {melhores_zagueiros_433}\n')
 
@@ -109,12 +134,12 @@ while  True:
                 melhores_atacantes_433 = list(melhores_atacantes.keys())[:3]
                 print(f'atacantes: {melhores_atacantes_433}\n')
 
-                print(f'goleiro: {melhor_goleiro}\n')
-
                 print(f'tecnico: {melhor_tecnico}\n')
                 break
 
             if esquema == 442:
+                print(f'goleiro: {melhor_goleiro}\n')
+
                 melhores_zagueiros_442 = list(melhores_zagueiros.keys())[:2]
                 print(f'zagueiros: {melhores_zagueiros_442}\n')
 
@@ -127,12 +152,12 @@ while  True:
                 melhores_atacantes_442 = list(melhores_atacantes.keys())[:2]
                 print(f'atacantes: {melhores_atacantes_442}\n')
 
-                print(f'goleiro: {melhor_goleiro}\n')
-
                 print(f'tecnico: {melhor_tecnico}\n')
                 break
 
             if esquema == 451:
+                print(f'goleiro: {melhor_goleiro}\n')
+
                 melhores_zagueiros_451 = list(melhores_zagueiros.keys())[:2]
                 print(f'zagueiros: {melhores_zagueiros_451}\n')
 
@@ -145,12 +170,12 @@ while  True:
                 melhores_atacantes_451 = list(melhores_atacantes.keys())[:1]
                 print(f'atacantes: {melhores_atacantes_451}\n')
 
-                print(f'goleiro: {melhor_goleiro}\n')
-
                 print(f'tecnico: {melhor_tecnico}\n')
                 break
 
             if esquema == 532:
+                print(f'goleiro: {melhor_goleiro}\n')
+
                 melhores_zagueiros_532 = list(melhores_zagueiros.keys())[:3]
                 print(f'zagueiros: {melhores_zagueiros_532}\n')
 
@@ -163,12 +188,12 @@ while  True:
                 melhores_atacantes_532 = list(melhores_atacantes.keys())[:2]
                 print(f'atacantes: {melhores_atacantes_532}\n')
 
-                print(f'goleiro: {melhor_goleiro}\n')
-
                 print(f'tecnico: {melhor_tecnico}\n')
                 break
 
             if esquema == 541:
+                print(f'goleiro: {melhor_goleiro}\n')
+
                 melhores_zagueiros_541 = list(melhores_zagueiros.keys())[:3]
                 print(f'zagueiros: {melhores_zagueiros_541}\n')
 
@@ -180,8 +205,6 @@ while  True:
 
                 melhores_atacantes_541 = list(melhores_atacantes.keys())[:1]
                 print(f'atacantes: {melhores_atacantes_541}\n')
-
-                print(f'goleiro: {melhor_goleiro}\n')
 
                 print(f'tecnico: {melhor_tecnico}\n')
                 break
