@@ -7,14 +7,9 @@ strNomeArq = f'{strDiretorio}/relacao_servidores_ifrn.csv'
 
 with open(strNomeArq, 'r', encoding='UTF-8') as file:
     csv_reader = csv.reader(file)
-
-    # A primeira linha geralmente contém os cabeçalhos
     header = next(csv_reader)
     dictServidores = [list(zip(header, row)) for row in csv_reader]
 
-# Inicialize um dicionário para armazenar os resultados
-# Inicialize um dicionário para armazenar os resultados
-# Inicialize uma lista para armazenar os resultados
 listInfo = [["Sigla do Campus", "Tipo de servidores"]]
 
 for servidor in dictServidores:
