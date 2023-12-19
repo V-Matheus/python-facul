@@ -16,7 +16,7 @@ while True:
             break
         else:
             strNomeArq = f'{strDiretorio}/cartola_fc_{ano}.json'
-            with open(strNomeArq, 'r', encoding='UTF-8') as dictOpen:
+            with open(strNomeArq, 'r', encoding='utf-8') as dictOpen:
                 dictCartola = json.load(dictOpen)
             break
     except ValueError:
@@ -56,10 +56,10 @@ for atleta in atletas:
     maior_pontuacao = round(jogos_num * media_num, 2)
 
     # Armazena a maior pontuação para cada jogador no dicionário maiores_pontuacoes
-    maiores_pontuacoes[nome] = {'pontuacao': maior_pontuacao, 'posicao': posicoes[str(posicao_id)], 'apelido' : apelido, 'clube': clube}
-
+    maiores_pontuacoes[nome] = {'pontuacao': maior_pontuacao, 'posicao': posicao_id, 'apelido' : apelido, 'clube': clube}
 # Ordena os jogadores por maior pontuação
 melhores_atletas = sorted(maiores_pontuacoes.items(), key=lambda x: x[1]['pontuacao'], reverse=True)
+
 # Criar dicionários separados para cada posição
 melhores_goleiros = {}
 melhores_laterais = {}
@@ -71,23 +71,23 @@ melhores_tecnicos = {}
 # Iterar sobre os melhores jogadores
 for jogador, info in melhores_atletas:
     posicao = info['posicao']
+    
     # Adicionar o jogador ao dicionário da posição correspondente
-    if posicao == 'Goleiro':
+    if posicao == 1:
         melhores_goleiros[jogador] = info
-    elif posicao == 'Lateral':
+    elif posicao == 2:
         melhores_laterais[jogador] = info
-    elif posicao == 'Zagueiro':
+    elif posicao == 3:
         melhores_zagueiros[jogador] = info
-    elif posicao == 'Meia':
+    elif posicao == 4:
         melhores_meias[jogador] = info
-    elif posicao == 'Atacante':
+    elif posicao == 5:
         melhores_atacantes[jogador] = info
-    elif posicao == 'Técnico':
+    elif posicao == 6:
         melhores_tecnicos[jogador] = info
 
 esquema_possiveis = [343, 352, 433, 442, 451, 532, 541]
 # Exibir Resultados
-
 while  True:
     esquema = int(input(f'Escolha um esquema tático: \n {esquema_possiveis}\n'))
     melhor_goleiro = {'nome': list(melhores_goleiros.keys())[1], 'info': list(melhores_goleiros.values())[1]}
