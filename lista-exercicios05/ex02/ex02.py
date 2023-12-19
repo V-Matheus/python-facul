@@ -10,14 +10,13 @@ with open(strNomeArq, 'r', encoding='UTF-8') as file:
     header = next(csv_reader)
     dictServidores = [list(zip(header, row)) for row in csv_reader]
 
-listInfo = [["Sigla do Campus", "Tipo de servidores"]]
+listInfo = []
 
 for servidor in dictServidores:
     # Acesse diretamente o índice correto, mas verifique se a lista tem pelo menos 12 elementos
     servidor_info = servidor[0][1].split(';')
     sigla_campus = servidor_info[11] if len(servidor_info) >= 12 and servidor_info[11] and not servidor_info[11].isdigit() else None
     categoria = servidor[0][1].split(';')[0]
-
     # Se a sigla_campus já existe na lista de resultados e não é 'None' ou um número, atualize a quantidade correspondente à categoria
     if sigla_campus and not sigla_campus.isdigit():
         campus_encontrado = False
@@ -45,7 +44,7 @@ with open(caminho_arquivo_csv, mode='w', newline='', encoding='UTF-8') as arquiv
     escritor_csv = csv.writer(arquivo_csv, delimiter=';')
 
     # Escrever o cabeçalho
-    escritor_csv.writerow(["Sigla do Campus", "Categorias"])
+    escritor_csv.writerow(["Sigla do Campus", "Docente", 'tecnico_administrativo', 'estagiario', 'indefinida'])
 
     # Escrever os dados
     for campus_entry in listInfo:
