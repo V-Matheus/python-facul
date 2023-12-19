@@ -9,25 +9,23 @@ while True:
     try:
         ano = int(input(f"Escolha um ano (0 para sair): "))
         if ano == 0:
-          print("Saindo do programa!")
-          sys.exit()
+            print("Saindo do programa!")
+            sys.exit()
         elif ano == datetime.datetime.now().year:
-          dictCartola = requests.get(strURL, verify=True).json()
-          break
+            dictCartola = requests.get(strURL, verify=True).json()
+            break
         else:
-            strNomeArq = strDiretorio + f'\\cartola_fc_{ano}.json'
-            dictOpen = open(strNomeArq,'r',encoding='UTF-8')
-            dictCartola = dictOpen.read()
-            dictCartola = json.loads(dictCartola)
-            dictOpen.close()
+            strNomeArq = f'{strDiretorio}/cartola_fc_{ano}.json'
+            with open(strNomeArq, 'r', encoding='UTF-8') as dictOpen:
+                dictCartola = json.load(dictOpen)
             break
     except ValueError:
-        print("\nERROR: O valor informado precisa ser inteiro de base10!")
+        print("\nERROR: O valor informado precisa ser inteiro de base 10!")
         continue
     except FileNotFoundError:
-        print("\nERROR: O ano desejado não possui arquivo!")
-    except:
-        print(f"\nERROR: {sys.exc_info()[0]}")
+        print(f"\nERROR: O arquivo para o ano {ano} não foi encontrado!")
+    except Exception as e:
+        print(f"\nERROR: {e}")
         
 # Puxando informações dos clubes
 
@@ -62,7 +60,6 @@ for atleta in atletas:
 
 # Ordena os jogadores por maior pontuação
 melhores_atletas = sorted(maiores_pontuacoes.items(), key=lambda x: x[1]['pontuacao'], reverse=True)
-
 # Criar dicionários separados para cada posição
 melhores_goleiros = {}
 melhores_laterais = {}
@@ -74,7 +71,6 @@ melhores_tecnicos = {}
 # Iterar sobre os melhores jogadores
 for jogador, info in melhores_atletas:
     posicao = info['posicao']
-
     # Adicionar o jogador ao dicionário da posição correspondente
     if posicao == 'Goleiro':
         melhores_goleiros[jogador] = info
@@ -90,7 +86,6 @@ for jogador, info in melhores_atletas:
         melhores_tecnicos[jogador] = info
 
 esquema_possiveis = [343, 352, 433, 442, 451, 532, 541]
-
 # Exibir Resultados
 
 while  True:
