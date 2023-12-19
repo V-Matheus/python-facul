@@ -39,7 +39,21 @@ for servidor in dictServidores:
             # Se a sigla_campus não foi encontrada, adicione uma nova entrada à lista
             listInfo.append([sigla_campus, {categoria: 1}])
 
-# Exibir o resultado final
-for campus_entry in listInfo:
-    print(campus_entry)
+diretorio_script = os.path.dirname(os.path.abspath(__file__))
 
+# Caminho do arquivo CSV
+caminho_arquivo_csv = os.path.join(diretorio_script, "servidores_campi.csv")
+
+# Abrir o arquivo CSV para escrita
+with open(caminho_arquivo_csv, mode='w', newline='', encoding='UTF-8') as arquivo_csv:
+    # Criar um objeto de escrita CSV
+    escritor_csv = csv.writer(arquivo_csv, delimiter=';')
+
+    # Escrever o cabeçalho
+    escritor_csv.writerow(["Sigla do Campus", "Categorias"])
+
+    # Escrever os dados
+    for campus_entry in listInfo:
+        escritor_csv.writerow(campus_entry)
+
+print(f"Os dados foram salvos em {caminho_arquivo_csv}.")
