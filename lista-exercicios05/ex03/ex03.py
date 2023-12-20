@@ -76,4 +76,18 @@ caminho_arquivo = os.path.join(diretorio, f"medias_cotacoes_{ano}.json")
 with open(caminho_arquivo, 'w', encoding='utf-8') as arquivo_json:
     json.dump(dicDados, arquivo_json, ensure_ascii=False, indent=2)
 
-print(f"O dicionário foi salvo no arquivo {caminho_arquivo}.")
+
+# Criar arquivo CSV
+caminho_arquivo_csv = os.path.join(diretorio, f"medias_cotacoes_{ano}.csv")
+
+with open(caminho_arquivo_csv, mode='w', encoding='UTF-8') as arquivo_csv:
+    # Escrever o cabeçalho
+    arquivo_csv.write("mes - media_compra - media_venda\n")
+
+    # Escrever os dados
+    for mes, medias in dicDados.items():
+        media_compra = f"{medias['media_compra']:.5f}"
+        media_venda = f"{medias['media_venda']:.5f}"
+        arquivo_csv.write(f"{mes} - {media_compra} - {media_venda}\n")
+
+print(f"O arquivo Json e o CSV foram salvos no arquivo em: {diretorio}.")
