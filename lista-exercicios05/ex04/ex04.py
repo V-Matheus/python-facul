@@ -50,6 +50,16 @@ for arquivo in os.listdir(pasta_csv):
                 }
                 informacoes.append(informacao)
 
-# Exibir a lista final de informações
-for info in informacoes:
-    print(info)
+# Caminho completo para o arquivo CSV
+caminho_arquivo_csv = os.path.join(caminho_dados_estatisticos, 'serie_historica_anp.csv')
+
+# Escrevendo no arquivo CSV
+with open(caminho_arquivo_csv, 'w', encoding='utf-8') as csvfile:
+    # Escrevendo o cabeçalho
+    csvfile.write(';'.join(informacoes[0].keys()) + '\n')
+
+    # Escrevendo as informações
+    for info in informacoes:
+        csvfile.write(';'.join(map(str, info.values())) + '\n')
+
+print(f"Dados salvos em: {caminho_arquivo_csv}")
