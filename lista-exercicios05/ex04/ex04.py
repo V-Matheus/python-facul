@@ -3,6 +3,17 @@ import os
 # Obtendo o caminho da pasta do script
 caminho_script = os.path.dirname(os.path.abspath(__file__))
 
+# Caminho completo para o diretório dados_estatisticos
+caminho_dados_estatisticos = os.path.join(caminho_script, 'dados_estatisticos')
+
+# Verificando se o diretório já existe ou não
+if not os.path.exists(caminho_dados_estatisticos):
+    # Criando o diretório se não existir
+    os.makedirs(caminho_dados_estatisticos)
+    print(f"Diretório 'dados_estatisticos' criado em: {caminho_dados_estatisticos}")
+else:
+    print(f"Diretório 'dados_estatisticos' já existe em: {caminho_dados_estatisticos}")
+
 # Caminho da pasta contendo os arquivos CSV
 pasta_csv = os.path.join(caminho_script, 'serie_historica_anp')
 
